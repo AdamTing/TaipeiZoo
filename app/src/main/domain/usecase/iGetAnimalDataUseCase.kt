@@ -4,7 +4,8 @@ import api.AnimaData
 
 
 interface iGetAnimalDataUseCase {
-    fun getAnimalData(callback:iGetAnimaDataUseCaseCallBack)
+    fun updateData(callback:iGetAnimaDataUseCaseCallBack)
+    fun getData():AnimaData
 }
 interface iGetAnimaDataUseCaseCallBack {
     fun getAnimaDataFailed(msg: String)

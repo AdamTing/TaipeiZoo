@@ -1,9 +1,11 @@
 package usecase
 
+import api.AnimaData
 import api.PavilionAreaData
 
 interface iGetPavilionAreaDataUseCase {
-    fun getPavilionAreaData(callback:iGetEstDataUseCaseCallBack)
+    fun updateData(callback:iGetEstDataUseCaseCallBack)
+    fun getData(): PavilionAreaData
 }
 interface iGetEstDataUseCaseCallBack {
     fun getPavilionAreaDataFailed(msg: String)

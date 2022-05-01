@@ -11,7 +11,7 @@ class GetAnimalDataUseCase : iGetAnimalDataUseCase {
     val animaDataService: AnimaDataService = RetrofitManager.getInstance().getaAimaDataService()
     var retryCount = 0
 
-    override fun getAnimalData(callback: iGetAnimaDataUseCaseCallBack) {
+    override fun updateData(callback: iGetAnimaDataUseCaseCallBack) {
         val _call: Call<AnimaData> = animaDataService.getData()
         // 4. 執行call
         _call.enqueue(object : Callback<AnimaData?> {
@@ -57,6 +57,10 @@ class GetAnimalDataUseCase : iGetAnimalDataUseCase {
 
             }
         })
+    }
+
+    override fun getData(): AnimaData {
+        TODO("Not yet implemented")
     }
 
 

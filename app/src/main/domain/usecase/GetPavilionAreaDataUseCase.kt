@@ -12,7 +12,7 @@ class GetPavilionAreaDataUseCase : iGetPavilionAreaDataUseCase {
     val pavilionAreaDataService: PavilionAreaDataService = RetrofitManager.getInstance().pavilionAreaDataService
 
 
-    override fun getPavilionAreaData(callback:iGetEstDataUseCaseCallBack) {
+    override fun updateData(callback:iGetEstDataUseCaseCallBack) {
         val _call: Call<PavilionAreaData> = pavilionAreaDataService.getData()
         // 4. 執行call
         _call.enqueue(object : Callback<PavilionAreaData?> {
@@ -58,5 +58,9 @@ class GetPavilionAreaDataUseCase : iGetPavilionAreaDataUseCase {
 
             }
         })
+    }
+
+    override fun getData(): PavilionAreaData {
+        TODO("Not yet implemented")
     }
 }
