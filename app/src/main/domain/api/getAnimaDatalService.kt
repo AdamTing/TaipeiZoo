@@ -15,7 +15,7 @@ data class AnimaData(
         var limit: Int? = null,
         var offset: Int? = null,
         var count: Int? = null,
-        var sort: Int? = null,
+        var sort: String? = null,
         var results: ArrayList<ResultData>? = null,
     ) {
         data class ResultData(
