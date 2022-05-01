@@ -41,15 +41,16 @@ android {
 
         //MVVM
         def weatherView = 'src/main/presentation/mvvm/weatherView'
-        def headerView = 'src/main/presentation/mvvm/headerView'
-        def estView = 'src/main/presentation/mvvm/estView'
-        def tempTimeView = 'src/main/presentation/mvvm/tempTimeView'
-        def busRouteMapView = 'src/main/presentation/mvvm/busRouteMapView'
-        def qrCodeView = 'src/main/presentation/mvvm/qrCodeView'
-        def marqueeView = 'src/main/presentation/mvvm/marqueeView'
-        def busVideoView = 'src/main/presentation/mvvm/busVideoView'
+//        def headerView = 'src/main/presentation/mvvm/headerView'
+//        def estView = 'src/main/presentation/mvvm/estView'
+//        def tempTimeView = 'src/main/presentation/mvvm/tempTimeView'
+//        def busRouteMapView = 'src/main/presentation/mvvm/busRouteMapView'
+//        def qrCodeView = 'src/main/presentation/mvvm/qrCodeView'
+//        def marqueeView = 'src/main/presentation/mvvm/marqueeView'
+//        def busVideoView = 'src/main/presentation/mvvm/busVideoView'
 
-
+        def pavilionView = 'src/main/presentation/mvvm/pavilionView'
+        def pavilionList = 'src/main/presentation/mvvm/pavilionList'
 
         //data
         def data = 'src/main/data'
@@ -64,14 +65,16 @@ android {
                     "${data}",
                     "${domain}",
                     "${presentant}/${javaDir}",
-                    "${weatherView}/${javaDir}",
-                    "${headerView}/${javaDir}",
-                    "${estView}/${javaDir}",
-                    "${tempTimeView}/${javaDir}",
-                    "${busRouteMapView}/${javaDir}",
-                    "${qrCodeView}/${javaDir}",
-                    "${marqueeView}/${javaDir}",
-                    "${busVideoView}/${javaDir}",
+                    "${pavilionView}/${javaDir}",
+                    "${pavilionList}/${javaDir}",
+
+//                    "${headerView}/${javaDir}",
+//                    "${estView}/${javaDir}",
+//                    "${tempTimeView}/${javaDir}",
+//                    "${busRouteMapView}/${javaDir}",
+//                    "${qrCodeView}/${javaDir}",
+//                    "${marqueeView}/${javaDir}",
+//                    "${busVideoView}/${javaDir}",
 
 
             ]
@@ -80,14 +83,16 @@ android {
             res.srcDirs = [
                     "${mainDir}/${resDir}",
 //                    "${presentant}/${resDir}",
-                    "${weatherView}/${resDir}",
-                    "${headerView}/${resDir}",
-                    "${estView}/${resDir}",
-                    "${tempTimeView}/${resDir}",
-                    "${busRouteMapView}/${resDir}",
-                    "${qrCodeView}/${resDir}",
-                    "${marqueeView}/${resDir}",
-                    "${busVideoView}/${resDir}",
+                    "${pavilionView}/${resDir}",
+                    "${pavilionList}/${resDir}",
+
+//                    "${headerView}/${resDir}",
+//                    "${estView}/${resDir}",
+//                    "${tempTimeView}/${resDir}",
+//                    "${busRouteMapView}/${resDir}",
+//                    "${qrCodeView}/${resDir}",
+//                    "${marqueeView}/${resDir}",
+//                    "${busVideoView}/${resDir}",
             ]
         }
 
