@@ -1,12 +1,7 @@
 package usecase
 
-import api.AnimaData
-import api.AnimaDataService
-import api.RetrofitManager
+import api.*
 import io.reactivex.subjects.BehaviorSubject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 //取得動物資料的UseCase
 class GetAnimalDataUseCase : iGetAnimalDataUseCase {
@@ -23,27 +18,16 @@ class GetAnimalDataUseCase : iGetAnimalDataUseCase {
             mInstance = null
         }
     }
-
-    val animaDataService: AnimaDataService = RetrofitManager.getInstance().getaAimaDataService()
-    var retryCount = 0
     override val animalData: BehaviorSubject<AnimaData> = BehaviorSubject.create()
 
     override fun updateData(callback: iGetAnimaDataUseCaseCallBack) {
-        val _call: Call<AnimaData> = animaDataService.getData()
-        // 4. 執行call
-        _call.enqueue(object : Callback<AnimaData?> {
-            override fun onResponse(call: Call<AnimaData?>?, response: Response<AnimaData?>) {
-                response.body()?.let {
-                    animalData.onNext(it)
-                    callback.getAnimaDataSussed(it)
-                }
-
+        GetAnimalAPI().getData(object : iGetAnimalApiCallBack{
+            override fun getAnimaDataFailed(msg: String) {
+                callback.getAnimaDataFailed(msg)
             }
-
-            override fun onFailure(call: Call<AnimaData?>?, t: Throwable?) {
-                // 連線失敗
-                callback.getAnimaDataFailed("AnimaData更新失敗")
-
+            override fun getAnimaDataSussed(data: AnimaData) {
+                callback.getAnimaDataSussed(data)
+                animalData.onNext(data)
             }
         })
     }
