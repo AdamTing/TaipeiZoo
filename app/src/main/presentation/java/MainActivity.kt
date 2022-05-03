@@ -1,20 +1,20 @@
-package com.example.taipeizoo
-
+package taipeizoo
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
 import api.AnimaData
 import api.PavilionAreaData
+import api.PlantData
+import com.example.taipeizoo.R
 import com.example.taipeizoo.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaD
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaD
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -60,8 +61,10 @@ class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaD
 
 
 
-
-
+//初始化ProgressDialog
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Loading...")
+        progressDialog.show()
     }
 
     override fun getPavilionAreaDataFailed(msg: String) {
@@ -72,19 +75,23 @@ class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaD
 //        TODO("Not yet implemented")
     }
 
+    override fun getPlantDataFailed(msg: String) {
+//        TODO("Not yet implemented")
+    }
+
+    override fun getPlantDataSussed(data: PlantData) {
+//        TODO("Not yet implemented")
+
+    }
+
     override fun getAnimaDataFailed(msg: String) {
 //        TODO("Not yet implemented")
     }
 
     override fun getAnimaDataSussed(data: AnimaData) {
-//        TODO("Not yet implemented")
+        progressDialog.dismiss()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.main, menu)
-//        return true
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)

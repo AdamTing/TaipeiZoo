@@ -1,7 +1,8 @@
 package usecase
 
-import android.util.Log
-import api.*
+import api.PavilionAreaData
+import api.PavilionAreaDataService
+import api.RetrofitManager
 import io.reactivex.subjects.BehaviorSubject
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,7 +24,6 @@ class GetPavilionAreaDataUseCase : iGetPavilionAreaDataUseCase {
         }
     }
 
-    val TAG = "GetEstDataUseCase"
     val pavilionAreaDataService: PavilionAreaDataService = RetrofitManager.getInstance().pavilionAreaDataService
     override val pavilionAreaData: BehaviorSubject<PavilionAreaData> = BehaviorSubject.create()
 
@@ -32,19 +32,14 @@ class GetPavilionAreaDataUseCase : iGetPavilionAreaDataUseCase {
         // 4. 執行call
         _call.enqueue(object : Callback<PavilionAreaData?> {
             override fun onResponse(call: Call<PavilionAreaData?>?, response: Response<PavilionAreaData?>) {
-                // 連線成功
-                // 回傳的資料已轉成Albums物件，可直接用get方法取得特定欄位
-                response.body()?.let { pavilionAreaData.onNext(it) }
-                Log.d("response,PavilionAreaData", response.toString())
-
+                response.body()?.let {
+                    pavilionAreaData.onNext(it)
+                    callback.getPavilionAreaDataFailed("PavilionAreaData更新失敗")
+                }
             }
 
             override fun onFailure(call: Call<PavilionAreaData?>?, t: Throwable?) {
-                Log.d(TAG, "t"+t)
-                Log.d(TAG, "call"+call.toString())
-                Log.d(TAG, "PavilionAreaData更新失敗")
-
-
+                callback.getPavilionAreaDataFailed("PavilionAreaData更新失敗")
             }
         })
     }

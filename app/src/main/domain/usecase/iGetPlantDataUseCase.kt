@@ -11,6 +11,6 @@ interface iGetPlantDataUseCase {
     val PlantData: BehaviorSubject<PlantData>
 }
 interface iGetPlantDataUseCaseCallBack {
-    fun getAnimaDataFailed(msg: String)
-    fun getAnimaDataSussed(data: AnimaData)
+    fun getPlantDataFailed(msg: String)
+    fun getPlantDataSussed(data: PlantData)
 }
