@@ -18,11 +18,10 @@ import com.example.taipeizoo.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import usecase.GetAnimalDataUseCase
-import usecase.iGetAnimaDataUseCaseCallBack
-import usecase.iGetEstDataUseCaseCallBack
+import usecase.*
 
-class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaDataUseCaseCallBack {
+class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaDataUseCaseCallBack,
+    iGetPlantDataUseCaseCallBack {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -47,11 +46,14 @@ class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaD
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Syn Data
         var scope : CoroutineScope? = null
         scope = CoroutineScope(Dispatchers.IO)
         scope?.launch {
-//            GetPavilionAreaDataUseCase().updateData(this@MainActivity)
-            GetAnimalDataUseCase().updateData(this@MainActivity)
+            GetPavilionAreaDataUseCase.instance.updateData(this@MainActivity)
+            GetAnimalDataUseCase.instance.updateData(this@MainActivity)
+            GetPlantDataUseCase.instance.updateData(this@MainActivity)
         }?:run{
             Log.d("updateBalance","no response")
         }
@@ -78,11 +80,11 @@ class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaD
 //        TODO("Not yet implemented")
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.main, menu)
+//        return true
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)

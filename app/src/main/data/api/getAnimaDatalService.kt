@@ -76,7 +76,7 @@ interface AnimaDataService {
         "Content-Type: application/json",
         "cache-control: no-cache",
     )
-    @GET("api/v1/dataset/a3e2b221-75e0-45c1-8f97-75acbd43d613?scope=resourceAquire")
+    @GET("api/v1/dataset/a3e2b221-75e0-45c1-8f97-75acbd43d613?scope=resourceAquire&limit=1000")
     fun getData(): Call<AnimaData>
 }
 

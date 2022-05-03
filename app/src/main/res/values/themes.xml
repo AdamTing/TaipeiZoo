@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TaipeiZoo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TaipeiZoo" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">#F5F5F6</item>
+        <item name="colorPrimaryVariant">#E0E0E0</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -14,12 +14,22 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.TaipeiZoo.NoActionBar">
+    <style name="Theme.TaipeiZoo.NoActionBar" >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">#777575</item>
     </style>
 
     <style name="Theme.TaipeiZoo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.TaipeiZoo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Scrolling.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">#D3D3D3</item>
+    </style>
+    <style name="Theme.Scrolling.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

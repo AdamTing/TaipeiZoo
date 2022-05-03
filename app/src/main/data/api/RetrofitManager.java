@@ -22,6 +22,7 @@ public class RetrofitManager {
 
     private PavilionAreaDataService pavilionAreaDataService;
     private AnimaDataService animaDataService;
+    private PlantDataService plantDataService;
 
     public String domain = API_URL.Companion.getTAIPEI_ZOO_DOMAIN();
 
@@ -30,14 +31,13 @@ public class RetrofitManager {
         // 設置baseUrl即要連的網站，addConverterFactory用Gson作為資料處理Converter
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(domain)
-                .baseUrl(domain)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getOkHttpClientInstance())
                 .build();
 
         pavilionAreaDataService = retrofit.create(PavilionAreaDataService.class);
         animaDataService = retrofit.create(AnimaDataService.class);
-//        postHealthReport = retrofit.create(PostHealthReportService.class);
+        plantDataService = retrofit.create(PlantDataService.class);
     }
 
     public static RetrofitManager getInstance() {
@@ -50,9 +50,9 @@ public class RetrofitManager {
     public AnimaDataService getaAimaDataService() {
         return animaDataService;
     }
-//    public PostHealthReportService getPostHealthReportService() {
-//        return postHealthReport;
-//    }
+    public PlantDataService getaPlantDataService() {
+        return plantDataService;
+    }
 
     //客户端不对服务器证书做任何验证
     public static SSLSocketFactory getSSLSocketFactory() throws Exception {

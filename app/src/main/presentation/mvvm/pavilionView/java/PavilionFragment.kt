@@ -1,3 +1,5 @@
+package PavilionViiew
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,10 +30,10 @@ class PavilionFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        pavilionFragmentVM.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textHome
+//        pavilionFragmentVM.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return root
     }
 

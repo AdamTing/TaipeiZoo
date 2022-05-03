@@ -51,7 +51,9 @@ android {
 
         def pavilionView = 'src/main/presentation/mvvm/pavilionView'
         def pavilionList = 'src/main/presentation/mvvm/pavilionList'
-
+        def pavilionDetailView = 'src/main/presentation/mvvm/pavilionDetailView'
+        def pavilionDetailList = 'src/main/presentation/mvvm/pavilionDetailList'
+        def animalDetail = 'src/main/presentation/mvvm/animalDetail'
         //data
         def data = 'src/main/data'
 
@@ -67,7 +69,9 @@ android {
                     "${presentant}/${javaDir}",
                     "${pavilionView}/${javaDir}",
                     "${pavilionList}/${javaDir}",
-
+                    "${pavilionDetailView}/${javaDir}",
+                    "${pavilionDetailList}/${javaDir}",
+                    "${animalDetail}/${javaDir}",
 //                    "${headerView}/${javaDir}",
 //                    "${estView}/${javaDir}",
 //                    "${tempTimeView}/${javaDir}",
@@ -85,7 +89,9 @@ android {
 //                    "${presentant}/${resDir}",
                     "${pavilionView}/${resDir}",
                     "${pavilionList}/${resDir}",
-
+                    "${pavilionDetailView}/${resDir}",
+                    "${pavilionDetailList}/${resDir}",
+                    "${animalDetail}/${resDir}",
 //                    "${headerView}/${resDir}",
 //                    "${estView}/${resDir}",
 //                    "${tempTimeView}/${resDir}",
@@ -135,4 +141,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
 
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.github.bumptech.glide:glide:4.9.0"
 }

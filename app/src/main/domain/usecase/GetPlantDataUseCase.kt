@@ -8,13 +8,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 //取得動物資料的UseCase
-class GetAnimalDataUseCase : iGetAnimalDataUseCase {
+class GetPlantDataUseCase : iGetPlantDataUseCase {
     companion object {
-        private var mInstance:GetAnimalDataUseCase? = GetAnimalDataUseCase()
-        val instance: GetAnimalDataUseCase
+        private var mInstance:GetPlantDataUseCase? = GetPlantDataUseCase()
+        val instance: GetPlantDataUseCase
             get() {
                 if(mInstance == null) {
-                    mInstance = GetAnimalDataUseCase()
+                    mInstance = GetPlantDataUseCase()
                 }
                 return mInstance!!
             }
@@ -26,21 +26,21 @@ class GetAnimalDataUseCase : iGetAnimalDataUseCase {
 
 
     val TAG = "GetStopConfigUseCase"
-    val animaDataService: AnimaDataService = RetrofitManager.getInstance().getaAimaDataService()
+    val plantDataService: PlantDataService = RetrofitManager.getInstance().getaPlantDataService()
     var retryCount = 0
-    override val animalData: BehaviorSubject<AnimaData> = BehaviorSubject.create()
+    override val PlantData: BehaviorSubject<PlantData> = BehaviorSubject.create()
 
-    override fun updateData(callback: iGetAnimaDataUseCaseCallBack) {
-        val _call: Call<AnimaData> = animaDataService.getData()
+    override fun updateData(callback: iGetPlantDataUseCaseCallBack) {
+        val _call: Call<PlantData> = plantDataService.getData()
         // 4. 執行call
-        _call.enqueue(object : Callback<AnimaData?> {
-            override fun onResponse(call: Call<AnimaData?>?, response: Response<AnimaData?>) {
+        _call.enqueue(object : Callback<PlantData?> {
+            override fun onResponse(call: Call<PlantData?>?, response: Response<PlantData?>) {
                 // 連線成功
                 // 回傳的資料已轉成Albums物件，可直接用get方法取得特定欄位
 //                val response : PavilionAreaData? = response.body()
-                Log.d("response,AnimaData", response.body()?.result?.results?.size.toString())
+                Log.d("response,PlantData", response.body()?.result?.results?.get(2).toString())
 
-                response.body()?.let { animalData.onNext(it) }
+                response.body()?.let { PlantData.onNext(it) }
 //                response?.let {
 //                        it1 -> EstDatasApiUseCase.instance.setData(it1)
 //
@@ -58,7 +58,7 @@ class GetAnimalDataUseCase : iGetAnimalDataUseCase {
 
             }
 
-            override fun onFailure(call: Call<AnimaData?>?, t: Throwable?) {
+            override fun onFailure(call: Call<PlantData?>?, t: Throwable?) {
                 // 連線失敗
 //                                Log.d(TAG,"e...:"+e)
                 // connection timed out...let's try again
@@ -78,24 +78,21 @@ class GetAnimalDataUseCase : iGetAnimalDataUseCase {
         })
     }
 
-    override fun getDataByPavilion(E_Name:String): ArrayList<AnimaData.Result.ResultData> {
-        val result = ArrayList<AnimaData.Result.ResultData>()
-        animalData.value?.result?.results?.let { results->
-            results.forEach {
-                if(E_Name.contains(it.A_Location.toString())){
-                    result.add(it)
-                }
-            }
-        }
-        return result
+    override fun getDataById(): AnimaData {
+        TODO("Not yet implemented")
     }
 
-    override fun getDataById(id: Int): AnimaData.Result.ResultData? {
-        animalData.value?.result?.results?.let { results->
-            results.forEach {
-                if(it._id ==id){ return it }
-            }
-        }
-        return null
-    }
+
+//    suspend fun _getStopConfig(stopId:Int): IstopConfig? {
+//        val retrofit = Retrofit.Builder()
+//                .baseUrl(API_URL.UrlDomain)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//                .build()
+//        val service = retrofit.create(IstopConfigService::class.java)
+//        val result = service.getConfig(stopId).await()
+//        val response = result.body()
+//        Log.d("_getStopConfig",response.toString())
+//        return response
+//    }
 }
