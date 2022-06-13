@@ -49,9 +49,6 @@ class PavilionRvAdapter(var dataList: ArrayList<PavilionAreaData.Result.ResultDa
         val intent = Intent(view.context, PavilionDitelActivity::class.java)
 
         intent.putExtra("PavilionID", dataList[position]._id)
-//
-//        intent.putExtra("TableID", case.tableID)
-//        intent.putExtra("TableType", TableType.Baccarat.value.toInt())
         return intent
     }
 
@@ -66,12 +63,6 @@ class PavilionRvAdapter(var dataList: ArrayList<PavilionAreaData.Result.ResultDa
 
         holder.bind(dataList[position] , position)
 
-//        when (holder) {
-//
-//            is Header -> holder.bind(element as XbbNewHallＴitleModel, position)
-//
-//            else -> throw IllegalArgumentException()
-//        }
     }
 
 
