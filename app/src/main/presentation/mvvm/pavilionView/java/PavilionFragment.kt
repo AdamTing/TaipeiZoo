@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.taipeizoo.databinding.FragmentHomeBinding
 
-class PavilionFragment : Fragment() {
+class PavilionFragment : Fragment(), LifecycleOwner {
 
     private lateinit var pavilionFragmentVM: PavilionFragmentVM
     private var _binding: FragmentHomeBinding? = null
@@ -29,11 +30,7 @@ class PavilionFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-//        val textView: TextView = binding.textHome
-//        pavilionFragmentVM.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+        binding.pavilionRecycleView.init(this)
         return root
     }
 

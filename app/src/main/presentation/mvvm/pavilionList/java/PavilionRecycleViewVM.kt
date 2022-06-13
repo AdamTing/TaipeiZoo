@@ -2,6 +2,9 @@ package pavilionList
 
 import DisposeBagManager
 import TaipeiZooViewModeBaselInterface
+import androidx.lifecycle.MutableLiveData
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -12,16 +15,18 @@ import usecase.GetPavilionAreaDataUseCase
 class PavilionRecycleViewVM :TaipeiZooViewModeBaselInterface {
 
     override val bag: CompositeDisposable = DisposeBagManager.appGetBag()
-    var pavilionRvAdapter: BehaviorSubject<PavilionRvAdapter> = BehaviorSubject.create()
-
+//    var pavilionRvAdapter: BehaviorSubject<PavilionRvAdapter> = BehaviorSubject.create()
+    val pavilionRvAdapter: MutableLiveData<PavilionRvAdapter> by lazy {
+        MutableLiveData<PavilionRvAdapter>()
+    }
 
     override fun subscribeRx() {
         GetPavilionAreaDataUseCase.instance.pavilionAreaData
             .distinctUntilChanged()
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(mainThread())
             .subscribeBy(onNext = {
                 it.result?.results?.let {
-                    this.pavilionRvAdapter.onNext(PavilionRvAdapter(it))
+                    pavilionRvAdapter.value = PavilionRvAdapter(it)
                 }
             }).addTo(bag)
     }
