@@ -16,7 +16,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TaipeiZoo">
+        android:theme="@style/Theme.TaipeiZoo"
+        android:name="taipeizoo.MyApplication">
         <activity
             android:name="pavilionDetailView.PavilionDitelActivity"
             android:exported="false" />
