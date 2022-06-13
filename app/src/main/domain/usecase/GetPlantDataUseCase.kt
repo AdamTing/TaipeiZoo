@@ -25,6 +25,10 @@ class GetPlantDataUseCase : iGetPlantDataUseCase {
     var retryCount = 0
     override val PlantData: BehaviorSubject<PlantData> = BehaviorSubject.create()
 
+    override fun updateMockData(callback: iGetPlantDataUseCaseCallBack) {
+        callback.getPlantDataFailed("no data")
+    }
+
     override fun updateData(callback: iGetPlantDataUseCaseCallBack) {
         GetPlantAPI().updateData(object :iGetPlantDataApiCallBack{
             override fun getPlantDataFailed(msg: String) {

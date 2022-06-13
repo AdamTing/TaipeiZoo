@@ -52,9 +52,13 @@ class MainActivity : AppCompatActivity(), iGetEstDataUseCaseCallBack, iGetAnimaD
         var scope : CoroutineScope? = null
         scope = CoroutineScope(Dispatchers.IO)
         scope?.launch {
-            GetPavilionAreaDataUseCase.instance.updateData(this@MainActivity)
-            GetAnimalDataUseCase.instance.updateData(this@MainActivity)
-            GetPlantDataUseCase.instance.updateData(this@MainActivity)
+//            GetPavilionAreaDataUseCase.instance.updateData(this@MainActivity)
+//            GetAnimalDataUseCase.instance.updateData(this@MainActivity)
+//            GetPlantDataUseCase.instance.updateData(this@MainActivity)
+            GetPavilionAreaDataUseCase.instance.updateMockData(this@MainActivity)
+            GetAnimalDataUseCase.instance.updateMockData(this@MainActivity)
+            GetPlantDataUseCase.instance.updateMockData(this@MainActivity)
+
         }?:run{
             Log.d("updateBalance","no response")
         }

@@ -1,7 +1,10 @@
 package usecase
 
+import android.util.Log
 import api.*
+import com.google.gson.Gson
 import io.reactivex.subjects.BehaviorSubject
+import taipeizoo.MyApplication
 
 //取得展館資料的UseCase
 class GetPavilionAreaDataUseCase : iGetPavilionAreaDataUseCase {
@@ -19,6 +22,14 @@ class GetPavilionAreaDataUseCase : iGetPavilionAreaDataUseCase {
         }
     }
     override val pavilionAreaData: BehaviorSubject<PavilionAreaData> = BehaviorSubject.create()
+
+    override fun updateMockData(callback:iGetEstDataUseCaseCallBack) {
+        val jsonString = MyApplication.appContext?.let { Utils.getJsonFromAssets(it,"pavilion_data.json") }
+        val data = Gson().fromJson(jsonString, PavilionAreaData::class.java)
+        callback.getPavilionAreaDataSussed(data)
+        pavilionAreaData.onNext(data)
+
+    }
 
     override fun updateData(callback:iGetEstDataUseCaseCallBack) {
 

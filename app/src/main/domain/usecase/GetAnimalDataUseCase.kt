@@ -1,7 +1,10 @@
 package usecase
 
+import android.util.Log
 import api.*
+import com.google.gson.Gson
 import io.reactivex.subjects.BehaviorSubject
+import taipeizoo.MyApplication
 
 //取得動物資料的UseCase
 class GetAnimalDataUseCase : iGetAnimalDataUseCase {
@@ -19,6 +22,13 @@ class GetAnimalDataUseCase : iGetAnimalDataUseCase {
         }
     }
     override val animalData: BehaviorSubject<AnimaData> = BehaviorSubject.create()
+
+    override fun updateMockData(callback: iGetAnimaDataUseCaseCallBack) {
+        val jsonString = MyApplication.appContext?.let { Utils.getJsonFromAssets(it,"animal_data.json") }
+        val data = Gson().fromJson(jsonString, AnimaData::class.java)
+        callback.getAnimaDataSussed(data)
+        animalData.onNext(data)
+    }
 
     override fun updateData(callback: iGetAnimaDataUseCaseCallBack) {
         GetAnimalAPI().getData(object : iGetAnimalApiCallBack{
